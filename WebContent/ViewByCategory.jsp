@@ -21,13 +21,15 @@
 				"password");
 
 		Statement statement = connection.createStatement();
-		String queryString = "SELECT item.* FROM item";
-		String filter = request.getParameter("item"); 
-		if (filter != "all") {
-			queryString += " JOIN itemcategory ON item.category_id = itemcategory.id WHERE itemcategory.name = " + filter;
+		String queryString = "SELECT item.name, item.description, item.price, "
+				+ "itemcategory.name "
+				+ "FROM item JOIN itemcategory ON item.category_id = itemcategory.id";
+		String filter = request.getParameter("filter"); 
+		if (filter != "All") {
+			queryString += "  WHERE itemcategory.name = " + filter;
 		}
 
-		ResultSet resultset = statement.executeQuery("select * from item");
+		ResultSet resultset = statement.executeQuery(queryString);
 	%>
 
 	<TABLE BORDER="1">
@@ -37,8 +39,7 @@
 			<TH>Description</TH>
 			<TH>Price</TH>
 			<TH>Model_ID</TH>
-			<TH>Category_ID</TH>
-			<TH>Warehouse_ID</TH>
+			<TH>Category</TH>
 		</TR>
 		<%
 			while (resultset.next()) {
@@ -50,7 +51,6 @@
 			<TD><%=resultset.getString(4)%></TD>
 			<TD><%=resultset.getString(5)%></TD>
 			<TD><%=resultset.getString(6)%></TD>
-			<TD><%=resultset.getString(7)%></TD>
 		</TR>
 		<%
 			}
@@ -68,7 +68,7 @@
 	%>
 
 	<form action="HomePage.jsp">
-		<select name="item">
+		<select name="filter">
 			<option value="All">All</option>
 			<%
 				while (resultset.next()) {
@@ -79,7 +79,7 @@
 				}
 			%>
 
-		</select> <input type="submit" value="Submit">
+		</select>
 	</form>
 
 </body>
