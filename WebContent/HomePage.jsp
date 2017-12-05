@@ -21,6 +21,11 @@
 				"password");
 
 		Statement statement = connection.createStatement();
+		String queryString = "SELECT item.* FROM item";
+		if(request.getParameter("item") != "all"){
+			queryString += " JOIN itemcategory ON item.category_id = itemcategory.id WHERE itemcategory.name = ";
+		}
+		
 		ResultSet resultset = statement.executeQuery("select * from item");
 	%>
 
@@ -61,9 +66,9 @@
 		resultset = statement.executeQuery("SELECT name FROM itemcategory");
 	%>
 
-	<form action="model.jsp">
+	<form action="HomePage.jsp">
 		<select name="item">
-			<option value="all">All</option>
+			<option value="All">All</option>
 			<%
 				while (resultset.next()) {
 					String value = resultset.getString(1); 
@@ -75,10 +80,6 @@
 
 		</select> <input type="submit" value="Submit">
 	</form>
-	<%
-		String colour = request.getParameter("colour");
-		out.println(colour);
-	%>
 
 </body>
 </html>
