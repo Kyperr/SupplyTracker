@@ -51,5 +51,34 @@
 		%>
 	</TABLE>
 
+	<!-- A drop down menu to select the items from. -->
+	<!-- Setting up connection: -->
+	<%
+		Class.forName("com.mysql.jdbc.Driver");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/supplytracker", "root", "password");
+
+		statement = connection.createStatement();
+		resultset = statement.executeQuery("SELECT name FROM itemcategory");
+	%>
+
+	<form action="model.jsp">
+		<select name="item">
+			<option value="all">All</option>
+			<%
+				while (resultset.next()) {
+					String value = resultset.getString(1); 
+			%>
+			<option value="<%=value%>"><%=value%></option>
+			<%
+				}
+			%>
+
+		</select> <input type="submit" value="Submit">
+	</form>
+	<%
+		String colour = request.getParameter("colour");
+		out.println(colour);
+	%>
+
 </body>
 </html>
