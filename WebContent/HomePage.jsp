@@ -22,10 +22,11 @@
 
 		Statement statement = connection.createStatement();
 		String queryString = "SELECT item.* FROM item";
-		if(request.getParameter("item") != "all"){
-			queryString += " JOIN itemcategory ON item.category_id = itemcategory.id WHERE itemcategory.name = ";
+		String filter = request.getParameter("item"); 
+		if (filter != "all") {
+			queryString += " JOIN itemcategory ON item.category_id = itemcategory.id WHERE itemcategory.name = " + filter;
 		}
-		
+
 		ResultSet resultset = statement.executeQuery("select * from item");
 	%>
 
@@ -71,7 +72,7 @@
 			<option value="All">All</option>
 			<%
 				while (resultset.next()) {
-					String value = resultset.getString(1); 
+					String value = resultset.getString(1);
 			%>
 			<option value="<%=value%>"><%=value%></option>
 			<%
