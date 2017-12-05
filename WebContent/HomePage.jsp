@@ -11,7 +11,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Supply Tracker</title>
+<style><%@include file="/WEB-INF/styles.css"%></style>
 </head>
 <body>
 
