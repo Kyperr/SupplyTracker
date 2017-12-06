@@ -16,6 +16,11 @@
 </head>
 <body>
 
+	<h4>
+		This page shows the items whose price is greater than the value entered. 
+	</h4>
+
+	
 	<form action="ViewItemsGreaterThan" method="post">
 		<input type="text" name="minValue" value="${minValue}" /><input
 			type="SUBMIT" />

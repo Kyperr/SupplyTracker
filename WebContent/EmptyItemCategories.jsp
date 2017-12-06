@@ -29,6 +29,10 @@
 		ResultSet resultset = statement.executeQuery(queryString);
 	%>
 
+	<h4>
+		This page shows the item categories that are currently empty. 
+	</h4>
+
 	<TABLE BORDER="1">
 		<TR>
 			<TH>Category ID</TH>

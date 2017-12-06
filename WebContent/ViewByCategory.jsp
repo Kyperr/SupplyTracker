@@ -16,7 +16,10 @@
 </head>
 <body>
 
-
+	<h4>
+		This page shows the items based on the selected category. 
+	</h4>
+	
 
 <!-- A drop down menu to select the items from. -->
 	<!-- Setting up connection: -->

@@ -5,6 +5,35 @@ body {
 	font-family: Roboto;
 }
 
+div {
+	padding-left: 30px;
+	padding-top: 15px;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+
 table {
 	border-collapse: collapse;
 	width: 70%;

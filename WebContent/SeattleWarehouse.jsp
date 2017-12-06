@@ -29,6 +29,10 @@
 		ResultSet resultset = statement.executeQuery(queryString);
 	%>
 
+	<h4>
+		This page shows the items in the Seattle warehouse. 
+	</h4>
+
 	<TABLE BORDER="1">
 		<TR>
 			<TH>ID</TH>

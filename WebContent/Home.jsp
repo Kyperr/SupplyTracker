@@ -8,28 +8,32 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Supply Tracker</title>
+<style><%@include file="/WEB-INF/styles.css"%></style>
 </head>
 <body>
-	<%
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	<ul>
+		<%
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
-		DocumentBuilder db = dbf.newDocumentBuilder();
+			DocumentBuilder db = dbf.newDocumentBuilder();
 
-		String xmlPath = getServletContext().getRealPath("/WEB-INF/AvailablePages.xml");
-		System.out.println(xmlPath);
-		Document doc = db.parse(xmlPath);
+			String xmlPath = getServletContext().getRealPath("/WEB-INF/AvailablePages.xml");
+			System.out.println(xmlPath);
+			Document doc = db.parse(xmlPath);
 
-		NodeList link = doc.getElementsByTagName("link_name");
-		NodeList display = doc.getElementsByTagName("display_name");
+			NodeList link = doc.getElementsByTagName("link_name");
+			NodeList display = doc.getElementsByTagName("display_name");
 
-		for (int i = 0; i < link.getLength(); i++) {
-	%>
-	<a href="<%=link.item(i).getFirstChild().getNodeValue()%>"><%=display.item(i).getFirstChild().getNodeValue()%></a>
-	<br/>
-	<%
-		}
-	%>
-
+			for (int i = 0; i < link.getLength(); i++) {
+		%>
+		<li><a href="<%=link.item(i).getFirstChild().getNodeValue()%>"><%=display.item(i).getFirstChild().getNodeValue()%></a></li>
+		<%
+			}
+		%>	
+	</ul>
+	<h2>
+		Welcome to Supply Tracker! Click on one of the links to see your items. 
+	</h2>
 </body>
 </html>
