@@ -3,6 +3,11 @@ package servlets;
 
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +30,6 @@ public class ViewByCategory extends HttpServlet {
      */
     public ViewByCategory() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,10 +37,10 @@ public class ViewByCategory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewByCategory.jsp");
-		dispatcher.forward(request, response);
 		request.setAttribute("filter", selectedFilter);
+		dispatcher.forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

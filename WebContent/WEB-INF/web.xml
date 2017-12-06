@@ -12,5 +12,11 @@
 		<servlet-class>servlets.ViewByCategory</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
+  	<servlet>
+		<servlet-name>ViewItemsGreaterThan</servlet-name>
+		<servlet-class>servlets.ViewItemsGreaterThan</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
   
 </web-app>

@@ -16,21 +16,51 @@
 </head>
 <body>
 
+
+
+<!-- A drop down menu to select the items from. -->
+	<!-- Setting up connection: -->
 	<%
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/supplytracker", "root",
-				"password");
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/supplytracker", "root", "password");
 
 		Statement statement = connection.createStatement();
-		String queryString = "SELECT item.name, item.description, item.price, "
-				+ "itemcategory.name "
+		ResultSet resultset = statement.executeQuery("SELECT name FROM itemcategory");
+	%>
+
+	<form action="ViewByCategory" method="post">
+		<select name="filter">
+			<option value="All">All</option>
+			<%
+				while (resultset.next()) {
+					String value = resultset.getString(1);
+					boolean isSelected = value.equals(request.getAttribute("filter"));
+			%>
+			<option value="<%=value%>" <% if(isSelected) {%>selected<%} %> ><%=value%></option>
+			<%
+				}
+			%>
+		</select>
+		<input type="submit" value="Submit">
+	</form>
+
+	<%
+		Class.forName("com.mysql.jdbc.Driver");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/supplytracker", "root",
+				"password");
+
+		statement = connection.createStatement();
+		String queryString = "SELECT item.id, item.name, item.description, item.price, itemcategory.name "
 				+ "FROM item JOIN itemcategory ON item.category_id = itemcategory.id";
-		String filter = request.getParameter("filter"); 
-		if (filter != "All") {
-			queryString += "  WHERE itemcategory.name = " + filter;
+		
+		String filter = request.getAttribute("filter").toString();
+		System.out.println("Filter: " + filter);
+		if (!filter.equals("All")) {
+			queryString += "  WHERE itemcategory.name = \"" + filter + "\"";
 		}
 
-		ResultSet resultset = statement.executeQuery(queryString);
+		System.out.println(queryString);
+		resultset = statement.executeQuery(queryString);
 	%>
 
 	<TABLE BORDER="1">
@@ -39,7 +69,6 @@
 			<TH>Name</TH>
 			<TH>Description</TH>
 			<TH>Price</TH>
-			<TH>Model_ID</TH>
 			<TH>Category</TH>
 		</TR>
 		<%
@@ -51,37 +80,11 @@
 			<TD><%=resultset.getString(3)%></TD>
 			<TD><%=resultset.getString(4)%></TD>
 			<TD><%=resultset.getString(5)%></TD>
-			<TD><%=resultset.getString(6)%></TD>
 		</TR>
 		<%
 			}
 		%>
 	</TABLE>
-
-	<!-- A drop down menu to select the items from. -->
-	<!-- Setting up connection: -->
-	<%
-		Class.forName("com.mysql.jdbc.Driver");
-		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/supplytracker", "root", "password");
-
-		statement = connection.createStatement();
-		resultset = statement.executeQuery("SELECT name FROM itemcategory");
-	%>
-
-	<form action="HomePage.jsp">
-		<select name="filter">
-			<option value="All">All</option>
-			<%
-				while (resultset.next()) {
-					String value = resultset.getString(1);
-			%>
-			<option value="<%=value%>"><%=value%></option>
-			<%
-				}
-			%>
-
-		</select>
-	</form>
-
+	<a href="Home.jsp">Back To Home</a>
 </body>
 </html>

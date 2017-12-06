@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmldata>
+    <query_page>
+    	<link_name>ViewByCategory</link_name>
+    	<display_name>View Item By Category</display_name>
+    </query_page>
+    <query_page>
+    	<link_name>ViewItemsGreaterThan</link_name>
+    	<display_name>View Items Greater Than</display_name>
+    </query_page>
+    <query_page>
+    	<link_name>ViewByCategory</link_name>
+    	<display_name>View Item By Category</display_name>
+    </query_page>
+</xmldata>
