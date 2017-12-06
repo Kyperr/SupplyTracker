@@ -18,5 +18,17 @@
 		<servlet-class>servlets.ViewItemsGreaterThan</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
+  	<servlet>
+		<servlet-name>ViewSeattleWarehouse</servlet-name>
+		<servlet-class>servlets.ViewSeattleWarehouse</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+  	<servlet>
+		<servlet-name>ViewEmptyItemCategories</servlet-name>
+		<servlet-class>servlets.ViewEmptyItemCategories</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
   
 </web-app>

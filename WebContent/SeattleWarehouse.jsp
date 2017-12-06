@@ -16,22 +16,14 @@
 </head>
 <body>
 
-	<form action="ViewItemsGreaterThan" method="post">
-		<input type="text" name="minValue" value="${minValue}" /><input
-			type="SUBMIT" />
-	</form>
-
 	<%
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/supplytracker", "root",
-				"password");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/supplytracker", "root",
+			"password");
 
-		if (request.getAttribute("minValue") == null) {
-			request.setAttribute("minValue", "0.0");
-		}
 		Statement statement = connection.createStatement();
-		String queryString = "SELECT item.id, item.name, item.description, item.price FROM item WHERE item.price > "
-				+ request.getAttribute("minValue");
+		String queryString = "SELECT item.id, item.name, item.description, item.price, warehouse.location FROM Item"
+				+ " JOIN Warehouse ON Item.warehouse_id = Warehouse.id WHERE Warehouse.location = 'Seattle';";
 
 		System.out.println(queryString);
 		ResultSet resultset = statement.executeQuery(queryString);
@@ -43,6 +35,7 @@
 			<TH>Name</TH>
 			<TH>Description</TH>
 			<TH>Price</TH>
+			<TH>Warehouse Location</TH>
 		</TR>
 		<%
 			while (resultset.next()) {
@@ -52,6 +45,7 @@
 			<TD><%=resultset.getString(2)%></TD>
 			<TD><%=resultset.getString(3)%></TD>
 			<TD><%=resultset.getString(4)%></TD>
+			<TD><%=resultset.getString(5)%></TD>
 		</TR>
 		<%
 			}

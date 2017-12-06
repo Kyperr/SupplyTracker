@@ -16,22 +16,14 @@
 </head>
 <body>
 
-	<form action="ViewItemsGreaterThan" method="post">
-		<input type="text" name="minValue" value="${minValue}" /><input
-			type="SUBMIT" />
-	</form>
-
 	<%
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/supplytracker", "root",
 				"password");
 
-		if (request.getAttribute("minValue") == null) {
-			request.setAttribute("minValue", "0.0");
-		}
 		Statement statement = connection.createStatement();
-		String queryString = "SELECT item.id, item.name, item.description, item.price FROM item WHERE item.price > "
-				+ request.getAttribute("minValue");
+		String queryString = "SELECT ic.id, ic.name Category FROM ItemCategory ic WHERE ic.name NOT IN "
+				+ "(SELECT DISTINCT(ic2.name) FROM ItemCategory ic2 JOIN Item i ON i.category_id = ic2.id);";
 
 		System.out.println(queryString);
 		ResultSet resultset = statement.executeQuery(queryString);
@@ -39,10 +31,8 @@
 
 	<TABLE BORDER="1">
 		<TR>
-			<TH>ID</TH>
-			<TH>Name</TH>
-			<TH>Description</TH>
-			<TH>Price</TH>
+			<TH>Category ID</TH>
+			<TH>Category Name</TH>
 		</TR>
 		<%
 			while (resultset.next()) {
@@ -50,8 +40,6 @@
 		<TR>
 			<TD><%=resultset.getString(1)%></td>
 			<TD><%=resultset.getString(2)%></TD>
-			<TD><%=resultset.getString(3)%></TD>
-			<TD><%=resultset.getString(4)%></TD>
 		</TR>
 		<%
 			}

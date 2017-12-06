@@ -9,7 +9,11 @@
     	<display_name>View Items Greater Than</display_name>
     </query_page>
     <query_page>
-    	<link_name>ViewByCategory</link_name>
-    	<display_name>View Item By Category</display_name>
+    	<link_name>ViewSeattleWarehouse</link_name>
+    	<display_name>View Items In Seattle Warehouse</display_name>
+    </query_page>
+    <query_page>
+    	<link_name>ViewEmptyItemCategories</link_name>
+    	<display_name>View Item Categories With No Items</display_name>
     </query_page>
 </xmldata>
